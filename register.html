@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | INGENIOUS</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+</head>
+<body>
+    <div class="overlay"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="shapes">
+                <span class="shape circle"></span>
+                <span class="shape triangle"></span>
+                <span class="shape square"></span>
+            </div>
+            <h1>INGENIOUS</h1>
+        </div>
+        <div class="nav-toggle" id="navToggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="register.html" class="active">Register</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            
+        </ul>
+    </nav>
+
+    <!-- Registration Form Section -->
+    <section class="register-section">
+        <div class="container">
+            <h2 class="section-title">Registration Form</h2>
+            <p class="section-description">Fill out the form below to register for the INGENIOUS competition.</p>
+            
+            <div class="form-container">
+                <div class="form-progress">
+                    <div class="progress-step active">
+                        <div class="step-number">1</div>
+                        <span>Team Info</span>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-number">2</div>
+                        <span>Project Details</span>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-number">3</div>
+                        <span>Confirmation</span>
+                    </div>
+                </div>
+                
+                <form id="registrationForm" class="registration-form">
+                    <!-- Step 1: Team Information -->
+                    <div class="form-step active" id="step1">
+                        <h3>Team Information</h3>
+                        
+                        <div class="form-group">
+                            <input type="text" id="teamName" name="teamName" required>
+                            <label for="teamName">Team Name</label>
+                            <div class="form-icon square"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" id="institution" name="institution" required>
+                            <label for="institution">Institution Name</label>
+                            <div class="form-icon circle"></div>
+                        </div>
+                        
+                        <div class="team-members">
+                            <h4>Team Members</h4>
+                            
+                            <div class="member-inputs">
+                                <div class="form-group">
+                                    <input type="text" id="memberName1" name="memberName1" required>
+                                    <label for="memberName1">Member 1 Name (Team Lead)</label>
+                                    <div class="form-icon triangle"></div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="email" id="memberEmail1" name="memberEmail1" required>
+                                    <label for="memberEmail1">Member 1 Email</label>
+                                    <div class="form-icon triangle"></div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="tel" id="memberPhone1" name="memberPhone1" required>
+                                    <label for="memberPhone1">Member 1 Phone</label>
+                                    <div class="form-icon triangle"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="member-inputs">
+                                <div class="form-group">
+                                    <input type="text" id="memberName2" name="memberName2">
+                                    <label for="memberName2">Member 2 Name (Optional)</label>
+                                    <div class="form-icon square"></div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="email" id="memberEmail2" name="memberEmail2">
+                                    <label for="memberEmail2">Member 2 Email</label>
+                                    <div class="form-icon square"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="member-inputs">
+                                <div class="form-group">
+                                    <input type="text" id="memberName3" name="memberName3">
+                                    <label for="memberName3">Member 3 Name (Optional)</label>
+                                    <div class="form-icon circle"></div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="email" id="memberEmail3" name="memberEmail3">
+                                    <label for="memberEmail3">Member 3 Email</label>
+                                    <div class="form-icon circle"></div>
+                                </div>
+                            </div>
+                            
+                            <button type="button" id="addMemberBtn" class="btn btn-secondary btn-small">+ Add Another Member</button>
+                        </div>
+                        
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-primary next-btn" id="step1Next">Next</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Project Details -->
+                    <div class="form-step" id="step2">
+                        <h3>Project Details</h3>
+                        
+                        <div class="form-group">
+                            <input type="text" id="projectTitle" name="projectTitle" required>
+                            <label for="projectTitle">Project Title</label>
+                            <div class="form-icon triangle"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select id="projectCategory" name="projectCategory" required>
+                                <option value="" disabled selected>Select a category</option>
+                                <option value="ai-ml">AI & Machine Learning</option>
+                                <option value="iot">Internet of Things</option>
+                                <option value="web-mobile">Web & Mobile Development</option>
+                                <option value="game-dev">Game Development</option>
+                                <option value="blockchain">Blockchain & Cryptocurrency</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <label for="projectCategory">Project Category</label>
+                            <div class="form-icon square"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select id="teamYear" name="teamYear" required>
+                                <option value="" disabled selected>Select your year</option>
+                                <option value="fe">First Year (FE)</option>
+                                <option value="se">Second Year (SE)</option>
+                                <option value="te">Third Year (TE)</option>
+                                <option value="be">Final Year (BE)</option>
+                                <option value="diploma">Diploma</option>
+                            </select>
+                            <label for="teamYear">Team Year</label>
+                            <div class="form-icon circle"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select id="department" name="department" required>
+                                <option value="" disabled selected>Select your department</option>
+                                <option value="cse">Computer Science & Engineering</option>
+                                <option value="it">Information Technology</option>
+                                <option value="ece">Electronics & Communication</option>
+                                <option value="eee">Electrical & Electronics</option>
+                                <option value="mech">Mechanical Engineering</option>
+                                <option value="civil">Civil Engineering</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <label for="department">Department</label>
+                            <div class="form-icon triangle"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="projectAbstract" name="projectAbstract" rows="4" required></textarea>
+                            <label for="projectAbstract">Project Abstract</label>
+                            <div class="form-icon circle"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="file-upload">
+                                <input type="file" id="projectFile" name="projectFile">
+                                <label for="projectFile" class="file-label">
+                                    <span class="file-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="17 8 12 3 7 8"></polyline>
+                                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                                        </svg>
+                                    </span>
+                                    <span class="file-text">Upload Project Proposal</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-secondary back-btn" id="step2Back">Back</button>
+                            <button type="button" class="btn btn-primary next-btn" id="step2Next">Next</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Confirmation -->
+                    <div class="form-step" id="step3">
+                        <h3>Confirmation</h3>
+                        
+                        <div class="confirmation-box">
+                            <p>Please review your information before submitting:</p>
+                            <div id="confirmationDetails"></div>
+                        </div>
+                        
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="termsConditions" name="termsConditions" required>
+                            <label for="termsConditions">I agree to the <a href="rules.html" class="terms-link">terms and conditions</a> of the competition</label>
+                        </div>
+                        
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-secondary back-btn" id="step3Back">Back</button>
+                            <button type="submit" class="btn btn-primary submit-btn" id="submitBtn">Submit Registration</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="success-animation">
+                <div class="checkmark-circle">
+                    <div class="checkmark draw"></div>
+                </div>
+            </div>
+            <h3>Registration Successful!</h3>
+            <p>Your team has been registered for INGENIOUS. An email confirmation has been sent to the team lead.</p>
+            <p>Your player number: <span class="player-number" id="playerNumber">456</span></p>
+            <button class="btn btn-primary close-modal">Continue</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="shapes">
+                        <span class="shape circle"></span>
+                        <span class="shape triangle"></span>
+                        <span class="shape square"></span>
+                    </div>
+                    <h2>INGENIOUS</h2>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="register.html">Register</a></li>
+                            <li><a href="rules.html">Rules</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Connect With Us</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 INGENIOUS. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    
+    
+        <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Supabase Configuration
+    const supabaseUrl = 'https://kvszherztvylicxlmene.supabase.co'
+    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2c3poZXJ6dHZ5bGljeGxtZW5lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxNzY3NTcsImV4cCI6MjA1ODc1Mjc1N30.jBwwfCpAQs5ZIerqnL7LHUImXLyKOTjSPj4vzqSVgB0'
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey)
+
+    // DOM Elements
+    const form = document.getElementById('registrationForm')
+    const successModal = document.getElementById('successModal')
+    const navToggle = document.getElementById('navToggle')
+    const navLinks = document.getElementById('navLinks')
+    const formSteps = document.querySelectorAll('.form-step')
+    const progressSteps = document.querySelectorAll('.progress-step')
+    const addMemberBtn = document.getElementById('addMemberBtn')
+
+    // Form State
+    let currentStep = 0
+    let memberCount = 3
+
+    // Navigation Event Listeners
+    document.getElementById('step1Next').addEventListener('click', () => {
+        if (validateStep(0)) showStep(1)
+    })
+
+    document.getElementById('step2Back').addEventListener('click', () => showStep(0))
+    
+    document.getElementById('step2Next').addEventListener('click', () => {
+        if (validateStep(1)) showStep(2)
+    })
+    
+    document.getElementById('step3Back').addEventListener('click', () => showStep(1))
+
+    // Add Member Functionality
+    addMemberBtn.addEventListener('click', function() {
+        memberCount++
+        if (memberCount <= 5) {
+            const teamMembers = document.querySelector('.team-members')
+            const memberInputs = document.createElement('div')
+            memberInputs.className = 'member-inputs'
+            memberInputs.innerHTML = `
+                <div class="form-group">
+                    <input type="text" id="memberName${memberCount}" name="memberName${memberCount}">
+                    <label for="memberName${memberCount}">Member ${memberCount} Name (Optional)</label>
+                    <div class="form-icon triangle"></div>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="memberEmail${memberCount}" name="memberEmail${memberCount}">
+                    <label for="memberEmail${memberCount}">Member ${memberCount} Email</label>
+                    <div class="form-icon triangle"></div>
+                </div>
+            `
+            teamMembers.insertBefore(memberInputs, addMemberBtn)
+            
+            if (memberCount === 5) {
+                addMemberBtn.style.display = 'none'
+            }
+        }
+    })
+
+    // Form Submission Handler
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault()
+        
+        if (validateStep(2)) {
+            const playerNumber = generatePlayerNumber()
+            await submitToSupabase(playerNumber)
+        }
+    })
+
+    // Modal Close Handler
+    document.querySelector('.close-modal').addEventListener('click', function() {
+        successModal.style.display = 'none'
+    })
+
+    // Mobile Navigation Toggle
+    if (navToggle) {
+        navToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active')
+        })
+    }
+
+    // Step Navigation
+    function showStep(step) {
+        formSteps.forEach((el, index) => el.classList.toggle('active', index === step))
+        progressSteps.forEach((el, index) => el.classList.toggle('active', index <= step))
+        currentStep = step
+        
+        if (step === 2) {
+            updateConfirmationDetails()
+        }
+    }
+
+    // Validation Functions
+    function validateStep(step) {
+        const validationRules = [
+            () => validateTeamInfo(),
+            () => validateProjectDetails(),
+            () => validateConfirmation()
+        ]
+
+        return validationRules[step]()
+    }
+
+    function validateTeamInfo() {
+        const requiredFields = [
+            'teamName', 
+            'institution', 
+            'memberName1', 
+            'memberEmail1'
+        ]
+
+        // Validate required fields
+        for (let fieldId of requiredFields) {
+            const field = document.getElementById(fieldId)
+            if (!field.value.trim()) {
+                highlightInvalidField(field)
+                return false
+            }
+        }
+
+        // Email validation for team lead
+        const emailField = document.getElementById('memberEmail1')
+        if (!isValidEmail(emailField.value)) {
+            highlightInvalidField(emailField)
+            return false
+        }
+
+        return true
+    }
+
+    function validateProjectDetails() {
+        const requiredFields = [
+            'projectTitle', 
+            'projectCategory', 
+            'teamYear', 
+            'department', 
+            'projectAbstract'
+        ]
+
+        // Validate required fields
+        for (let fieldId of requiredFields) {
+            const field = document.getElementById(fieldId)
+            if (!field.value.trim()) {
+                highlightInvalidField(field)
+                return false
+            }
+        }
+
+        // Validate additional team members
+        for (let i = 2; i <= memberCount; i++) {
+            const nameField = document.getElementById(`memberName${i}`)
+            const emailField = document.getElementById(`memberEmail${i}`)
+
+            // If name is filled, validate email
+            if (nameField && nameField.value.trim()) {
+                if (!emailField || !isValidEmail(emailField.value)) {
+                    if (emailField) highlightInvalidField(emailField)
+                    return false
+                }
+            }
+        }
+
+        return true
+    }
+
+    function validateConfirmation() {
+        const termsCheckbox = document.getElementById('termsConditions')
+        if (!termsCheckbox.checked) {
+            alert('Please agree to the terms and conditions')
+            return false
+        }
+        return true
+    }
+
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        return emailRegex.test(email.trim())
+    }
+
+    function highlightInvalidField(field) {
+        field.classList.add('invalid')
+        field.addEventListener('input', function removeInvalid() {
+            field.classList.remove('invalid')
+            field.removeEventListener('input', removeInvalid)
+        })
+        field.focus()
+    }
+
+    // Confirmation Details
+    function updateConfirmationDetails() {
+        const confirmationDetails = document.getElementById('confirmationDetails')
+        const members = collectTeamMembers()
+
+        confirmationDetails.innerHTML = `
+            <p><strong>Team Name:</strong> ${form.teamName.value}</p>
+            <p><strong>Institution:</strong> ${form.institution.value}</p>
+            <p><strong>Project Title:</strong> ${form.projectTitle.value}</p>
+            <p><strong>Category:</strong> ${form.projectCategory.options[form.projectCategory.selectedIndex].text}</p>
+            <p><strong>Year:</strong> ${form.teamYear.options[form.teamYear.selectedIndex].text}</p>
+            <p><strong>Department:</strong> ${form.department.options[form.department.selectedIndex].text}</p>
+            <div class="team-members-confirmation">
+                <p><strong>Team Members:</strong></p>
+                ${members.map(m => `<p>${m.name}${m.email ? ` (${m.email})` : ''}</p>`).join('')}
+            </div>
+        `
+    }
+
+    // Collect Team Members
+    function collectTeamMembers() {
+        const members = []
+        for (let i = 1; i <= memberCount; i++) {
+            const nameField = document.getElementById(`memberName${i}`)
+            const emailField = document.getElementById(`memberEmail${i}`)
+            
+            if (nameField && nameField.value.trim()) {
+                members.push({
+                    name: nameField.value.trim(),
+                    email: emailField ? emailField.value.trim() : ''
+                })
+            }
+        }
+        return members
+    }
+
+    // Generate Player Number
+    function generatePlayerNumber() {
+        return Math.floor(100000 + Math.random() * 900000)
+    }
+
+    // Supabase Submission
+    async function submitToSupabase(playerNumber) {
+        const submitBtn = document.getElementById('submitBtn')
+        const originalText = submitBtn.textContent
+
+        try {
+            submitBtn.textContent = 'Submitting...'
+            submitBtn.disabled = true
+
+            // Prepare submission data
+            const submissionData = {
+                player_number: playerNumber,
+                timestamp: new Date().toISOString(),
+                team_name: form.teamName.value,
+                institution: form.institution.value,
+                project_title: form.projectTitle.value,
+                project_category: form.projectCategory.value,
+                team_year: form.teamYear.value,
+                department: form.department.value,
+                project_abstract: form.projectAbstract.value,
+                team_members: JSON.stringify(collectTeamMembers()),
+                terms_accepted: document.getElementById('termsConditions').checked
+            }
+
+            // Submit to Supabase
+            const { data, error } = await supabase
+                .from('registrations')
+                .insert([submissionData])
+
+            if (error) throw error
+
+            // Update player number in modal and show success
+            document.getElementById('playerNumber').textContent = playerNumber
+            successModal.style.display = 'flex'
+
+            // Reset form
+            form.reset()
+            showStep(0)
+            memberCount = 3
+        } catch (error) {
+            console.error('Submission error:', error)
+            alert(`Submission failed: ${error.message}`)
+        } finally {
+            submitBtn.textContent = originalText
+            submitBtn.disabled = false
+        }
+    }
+
+    // Add CSS for invalid fields
+    const style = document.createElement('style')
+    style.textContent = `
+        .invalid {
+            border: 2px solid red !important;
+            animation: shake 0.3s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 90% { transform: translateX(-5px); }
+            20%, 80% { transform: translateX(5px); }
+            30%, 50%, 70% { transform: translateX(-5px); }
+            40%, 60% { transform: translateX(5px); }
+        }
+    `
+    document.head.appendChild(style)
+})
+        </script>
+    
+</body>
+</html>
