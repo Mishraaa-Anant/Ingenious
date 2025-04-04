@@ -307,9 +307,8 @@
         </div>
     </footer>
 
-    
-    
-        <script>
+    <!-- Original Form Script -->
+    <script>
   document.addEventListener('DOMContentLoaded', function() {
     // Supabase Configuration
     const supabaseUrl = 'https://kvszherztvylicxlmene.supabase.co'
@@ -603,8 +602,93 @@
         }
     `
     document.head.appendChild(style)
-})
-        </script>
+  })
+  </script>
     
+  <!-- Registration Time Over Script -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get the form and create the time-over message container
+    const form = document.getElementById('registrationForm');
+    const formContainer = document.querySelector('.form-container');
+    
+    // Create time-over message element
+    const timeOverMessage = document.createElement('div');
+    timeOverMessage.className = 'time-over-message';
+    timeOverMessage.innerHTML = `
+      <div class="message-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="6" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <h3>Registration Closed</h3>
+      <p>We're sorry, but the registration period for the INGENIOUS competition has ended.</p>
+      <p>Thank you for your interest. Please check back next year for future opportunities.</p>
+    `;
+    
+    // Style the message
+    const style = document.createElement('style');
+    style.textContent = `
+      .time-over-message {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        padding: 40px 30px;
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+      
+      .message-icon {
+        color: #ff5252;
+        margin-bottom: 20px;
+      }
+      
+      .time-over-message h3 {
+        color: #ff5252;
+        font-size: 28px;
+        margin-bottom: 15px;
+      }
+      
+      .time-over-message p {
+        color: #555;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Hide the form and progress steps
+    form.style.display = 'none';
+    const progressSteps = document.querySelector('.form-progress');
+    if (progressSteps) {
+      progressSteps.style.display = 'none';
+    }
+    
+    // Show the message
+    formContainer.appendChild(timeOverMessage);
+    
+    // Override the submitToSupabase function to prevent any submissions
+    window.submitToSupabase = function() {
+      console.log('Form submission blocked: Registration period has ended');
+      return Promise.reject('Registration period has ended');
+    };
+    
+    // Prevent form submission
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      return false;
+    });
+  });
+  </script>
 </body>
 </html>
